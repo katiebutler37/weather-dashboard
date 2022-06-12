@@ -10,3 +10,27 @@ header {
     text-align: center;
     color: white;
 }
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.card {
+    background-color: rgb(29, 34, 50);
+    border-radius: 0;
+    color: white;
+    padding: 6px;
+}
+
+.search-container {
+    flex: auto;
+}
+
+.forecasted-weather-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}

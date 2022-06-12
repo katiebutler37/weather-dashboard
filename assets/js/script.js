@@ -8,6 +8,7 @@ var cityInputEl = document.querySelector("#city");
 var cityFormEl = document.querySelector(".city-form");
 var displayContainerEl = document.querySelector(".display-container");
 var cityTitleEl = document.querySelector('.city-title');
+var currentWeatherContainerEl = document.querySelector(".current-weather-container");
 
 //Variable storing today's date
 var currentDay = moment().format("L");
@@ -22,6 +23,7 @@ var getCityCoordinates = function(city) {
         // request was successful
         if (response.ok) {
           response.json().then(function(data) {
+              if (data.features.length > 0) {
               //grab data from first item in features array because they are ordered from highest to lowest popularity ranking
             var latitude = data.features[0].properties.lat;
             var longitude = data.features[0].properties.lon;
@@ -30,27 +32,40 @@ var getCityCoordinates = function(city) {
             getWeatherData(latitude, longitude);
             // localStorage.setItem("latitude", JSON.stringify(latitude));
             // localStorage.setItem("longitude", JSON.stringify(longitude));
+              } else {
+                alert('Error: City Not Found');
+                // clear old content
+                cityInputEl.value = "";
+              }
           });
         } else {
           alert('Error: City Not Found');
+          // clear old content
+          cityInputEl.value = "";
         }
       })
       .catch(function(error) {
-        alert('Unable to connect to server');
+        alert('Error: Unable to connect to server');
+        // clear old content
+        cityInputEl.value = "";
       });
   };
 
   var getWeatherData = function(latitude, longitude) {
       // format the onecall api url
-    var onecallUrl =  onecall + "/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&appid=" + onecallApiKey;
+    var onecallUrl =  onecall + "/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&units=imperial&appid=" + onecallApiKey;
        // make a get request to url
        fetch(onecallUrl)
        .then(function(response) {
          // request was successful
          if (response.ok) {
-             console.log(response);
            response.json().then(function(data) {
-             console.log(data);
+             var currentTemp = data.current.temp;
+             var currentWind = data.current.wind_speed;
+             var currentHumidity = data.current.humidity;
+             var currentUVI = data.current.uvi;
+             var currentWeatherIcon = data.current.weather[0].icon;
+             displayCurrentWeather(currentTemp, currentWind, currentHumidity, currentUVI, currentWeatherIcon);
            });
          } else {
            alert('Error: City Not Found');
@@ -70,59 +85,71 @@ var getCityCoordinates = function(city) {
   
     if (city) {
       getCityCoordinates(city);
-  
-      // clear old content
-      displayContainerEl.textContent = "";
-      cityInputEl.value = "";
-      displayCurrentWeather(city);
+      //call display function and pass city variable to function as an argument
+    //   displayCurrentWeather(city);
     } else {
       alert('Please enter a city');
     }
   };
 
-  var displayCurrentWeather = function(city) {
-    console.log(city);
-    console.log(currentDay);
-    cityTitleEl.textContent = city + " (" + currentDay + ")";
+  var displayCurrentWeather = function(currentTemp, currentWind, currentHumidity, currentUVI, currentWeatherIcon) {
+     //clear old display content
+     currentWeatherContainerEl.innerHTML = "";
+
+    // get value from input element
+    var city = cityInputEl.value.trim();
+    var cityTitleArray = city.split(" ");
+    for (var i=0; i < cityTitleArray.length; i++) {
+        cityTitleArray[i] = cityTitleArray[i].charAt(0).toUpperCase() + cityTitleArray[i].slice(1).toLowerCase()
+    };
+    var cityTitle = cityTitleArray.join(" ");
+    cityTitleEl.innerHTML = cityTitle + " (" + currentDay + ")" + "<i class='" + currentWeatherIcon + "'></i>";
+    currentWeatherContainerEl.appendChild(cityTitleEl);
+
+    console.log(currentTemp);
+    console.log(currentWind);
+    console.log(currentHumidity);
+    console.log(currentUVI);
+    console.log(currentWeatherIcon);
+
+    //clear old input from form
+    cityInputEl.value = "";
   
-    // // loop over repos
-    // for (var i = 0; i < repos.length; i++) {
-    //   // format repo name
-    //   var repoName = repos[i].owner.login + '/' + repos[i].name;
-  
-    //   // create a container for each repo
-    //   var repoEl = document.createElement("a");
-    //   repoEl.classList = "list-item flex-row justify-space-between align-center";
-    //   repoEl.setAttribute("href", "./single-repo.html?repo=" + repoName);
-  
-    //   // create a span element to hold repository name
-    //   var titleEl = document.createElement('span');
-    //   titleEl.textContent = repoName;
-  
-    //   // append to container
-    //   repoEl.appendChild(titleEl);
-  
-    //   // create a status element
-    //   var statusEl = document.createElement('span');
-    //   statusEl.classList = 'flex-row align-center';
-  
-    //   // check if current repo has issues or not
-    //   if (repos[i].open_issues_count > 0) {
-    //     statusEl.innerHTML =
-    //       "<i class='fas fa-times status-icon icon-danger'></i>" + repos[i].open_issues_count + ' issue(s)';
-    //   } else {
-    //     statusEl.innerHTML = "<i class='fas fa-check-square status-icon icon-success'></i>";
-    //   }
-  
-    //   // append to container
-    //   repoEl.appendChild(statusEl);
-  
-    //   // append container to the dom
-    //   repoContainerEl.appendChild(repoEl);
-    // }
+    // create an HTML tag for temperature
+    var currentTempEl = document.createElement("p");
+    currentTempEl.classList = "current-weather";
+    //write text content
+    currentTempEl.innerHTML = "Temp: " + currentTemp + " &degF";
+    //append to the current weather container
+    currentWeatherContainerEl.appendChild(currentTempEl);
+
+     // create an HTML tag for wind
+     var currentWindEl = document.createElement("p");
+     currentWindEl.classList = "current-weather";
+     //write text content
+     currentWindEl.innerHTML = "Wind: " + currentWind + " MPH";
+     //append to the current weather container
+     currentWeatherContainerEl.appendChild(currentWindEl);
+
+    // create an HTML tag for humidity
+    var currentHumidityEl = document.createElement("p");
+    currentHumidityEl.classList = "current-weather";
+    //write text content
+    currentHumidityEl.innerHTML = "Humidity: " + currentHumidity + " %";
+    //append to the current weather container
+    currentWeatherContainerEl.appendChild(currentHumidityEl);
+
+     // create an HTML tag for UVI
+     var currentUVIEl = document.createElement("p");
+     currentUVIEl.classList = "current-weather";
+     //write text content
+     currentUVIEl.innerHTML = "UV Index: <span class='uvi'>" + currentUVI + "</span>";
+     //append to the current weather container
+     currentWeatherContainerEl.appendChild(currentUVIEl);
 }; 
 
   // add event listeners to forms
 cityFormEl.addEventListener('submit', formSubmitHandler);
 
 
+//   displayContainerEl.textContent = "";

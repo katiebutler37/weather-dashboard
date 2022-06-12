@@ -32,7 +32,7 @@ header h1 {
 
 .search-container label {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 18px;
     color: var(--primary-color);
 }
 
@@ -49,7 +49,19 @@ header h1 {
     border: 1px solid var(--primary-color);
     margin: 8px;
     padding: 6px;
-    display: flex; 
+    text-align: left;
+}
+
+.current-weather {
+    text-align: left;
+    display: block;
+}
+
+.city-title {
+    font-weight: bold;
+    font-size: 18px;
+    color: var(--primary-color);
+    display: block;
 }
 
 .card {

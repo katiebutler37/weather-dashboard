@@ -7,6 +7,10 @@ var onecallApiKey = "0b0775930b7defc71f282858d288d0c6";
 var cityInputEl = document.querySelector("#city");
 var cityFormEl = document.querySelector(".city-form");
 var displayContainerEl = document.querySelector(".display-container");
+var cityTitleEl = document.querySelector('.city-title');
+
+//Variable storing today's date
+var currentDay = moment().format("L");
 
 var getCityCoordinates = function(city) {
     // format the geoapify api url
@@ -24,10 +28,8 @@ var getCityCoordinates = function(city) {
             //*IMPORTANT NOTE: YOU CAN GIVE LOCAL VARIABLES TO ANOTHER FUNCTION IF WITHIN THE LOCAL FUNCTION...YOU CALL THE OTHER FUNCTION AND PASS THE VARIABLES AS AN ARGUMENT 
             // call getWeatherData 
             getWeatherData(latitude, longitude);
-            console.log(latitude);
-            console.log(longitude);
-            localStorage.setItem("latitude", JSON.stringify(latitude));
-            localStorage.setItem("longitude", JSON.stringify(longitude));
+            // localStorage.setItem("latitude", JSON.stringify(latitude));
+            // localStorage.setItem("longitude", JSON.stringify(longitude));
           });
         } else {
           alert('Error: City Not Found');
@@ -37,9 +39,6 @@ var getCityCoordinates = function(city) {
         alert('Unable to connect to server');
       });
   };
-
-// var savedlLatitude = localStorage.getItem("latitude").trim();
-// var savedLongitude = localStorage.getItem("longitude").trim();
 
   var getWeatherData = function(latitude, longitude) {
       // format the onecall api url
@@ -75,10 +74,53 @@ var getCityCoordinates = function(city) {
       // clear old content
       displayContainerEl.textContent = "";
       cityInputEl.value = "";
+      displayCurrentWeather(city);
     } else {
       alert('Please enter a city');
     }
   };
+
+  var displayCurrentWeather = function(city) {
+    console.log(city);
+    console.log(currentDay);
+    cityTitleEl.textContent = city + " (" + currentDay + ")";
+  
+    // // loop over repos
+    // for (var i = 0; i < repos.length; i++) {
+    //   // format repo name
+    //   var repoName = repos[i].owner.login + '/' + repos[i].name;
+  
+    //   // create a container for each repo
+    //   var repoEl = document.createElement("a");
+    //   repoEl.classList = "list-item flex-row justify-space-between align-center";
+    //   repoEl.setAttribute("href", "./single-repo.html?repo=" + repoName);
+  
+    //   // create a span element to hold repository name
+    //   var titleEl = document.createElement('span');
+    //   titleEl.textContent = repoName;
+  
+    //   // append to container
+    //   repoEl.appendChild(titleEl);
+  
+    //   // create a status element
+    //   var statusEl = document.createElement('span');
+    //   statusEl.classList = 'flex-row align-center';
+  
+    //   // check if current repo has issues or not
+    //   if (repos[i].open_issues_count > 0) {
+    //     statusEl.innerHTML =
+    //       "<i class='fas fa-times status-icon icon-danger'></i>" + repos[i].open_issues_count + ' issue(s)';
+    //   } else {
+    //     statusEl.innerHTML = "<i class='fas fa-check-square status-icon icon-success'></i>";
+    //   }
+  
+    //   // append to container
+    //   repoEl.appendChild(statusEl);
+  
+    //   // append container to the dom
+    //   repoContainerEl.appendChild(repoEl);
+    // }
+}; 
 
   // add event listeners to forms
 cityFormEl.addEventListener('submit', formSubmitHandler);

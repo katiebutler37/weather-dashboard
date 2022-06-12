@@ -60,12 +60,15 @@ var getCityCoordinates = function(city) {
          // request was successful
          if (response.ok) {
            response.json().then(function(data) {
+               console.log(data);
+               //get current weather data and assign variables
              var currentTemp = data.current.temp;
              var currentWind = data.current.wind_speed;
              var currentHumidity = data.current.humidity;
              var currentUVI = data.current.uvi;
              var currentWeatherIcon = data.current.weather[0].icon;
              displayCurrentWeather(currentTemp, currentWind, currentHumidity, currentUVI, currentWeatherIcon);
+             //get forecasted weather data and assign variables
            });
          } else {
            alert('Error: City Not Found');
@@ -106,12 +109,6 @@ var getCityCoordinates = function(city) {
     cityTitleEl.innerHTML = cityTitle + " (" + currentDay + ")" + "<i class='" + currentWeatherIcon + "'></i>";
     currentWeatherContainerEl.appendChild(cityTitleEl);
 
-    console.log(currentTemp);
-    console.log(currentWind);
-    console.log(currentHumidity);
-    console.log(currentUVI);
-    console.log(currentWeatherIcon);
-
     //clear old input from form
     cityInputEl.value = "";
   
@@ -147,6 +144,10 @@ var getCityCoordinates = function(city) {
      //append to the current weather container
      currentWeatherContainerEl.appendChild(currentUVIEl);
 }; 
+
+var displayWeatherForecast = function() {
+
+}
 
   // add event listeners to forms
 cityFormEl.addEventListener('submit', formSubmitHandler);

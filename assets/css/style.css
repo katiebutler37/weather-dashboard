@@ -1,3 +1,6 @@
+:root {
+    --primary-color: rgb(29, 34, 50);
+}
 body {
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
@@ -6,10 +9,14 @@ body {
 
 header {
     background-image: linear-gradient(to right, rgb(89, 125, 245) , rgb(3, 21, 63));
-    padding: 6px;
+    padding: 2px;
     text-align: center;
     color: white;
     width: 100%;
+}
+
+header h1 {
+    font-size: 26px;
 }
 
 .container-wrapper {
@@ -20,6 +27,13 @@ header {
 
 .search-container {
     flex: 1;
+    margin: 8px;
+}
+
+.search-container label {
+    font-weight: bold;
+    font-size: 20px;
+    color: var(--primary-color);
 }
 
 .form-input {
@@ -32,11 +46,10 @@ header {
     flex: 2;
 }
 .current-weather-container {
-    border: 1px solid rgb(64, 64, 64);
+    border: 1px solid var(--primary-color);
     margin: 8px;
     padding: 6px;
-    display: flex;
-    
+    display: flex; 
 }
 
 .card {
@@ -44,13 +57,14 @@ header {
     border-radius: 0;
     color: white;
     padding: 6px;
+    flex: 1;
+    margin: 8px;
 }
 
 .forecasted-weather-container {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin: 8px;
 }
 
 /* @media (min-width: 576px) {

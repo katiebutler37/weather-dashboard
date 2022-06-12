@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- link to bootstrap API -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
     <!-- link to custom css stylesheet -->
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Weather Dashboard</title>
@@ -14,9 +12,9 @@
     <header>
         <h1>Weather Dashboard</h1>
     </header>
-    <main class="container">
-        <div class="row">
-            <section class="col 12 col-md-3 search-container">
+    <main>
+        <div class="container-wrapper">
+            <div class="search-container">
                 <form>
                     <label for="name">Search for a City:</label>
                     <input type="text" placeholder="i.e. San Diego" name="city" id="city" class="form-input"/>
@@ -24,9 +22,8 @@
                         Search
                     </button>
                 </form>    
-
-            </section>
-            <section class="col-12 col-md-9 display-container">
+            </div>
+            <div class="display-container">
                     <div class="current-weather-container">test</div>
                     <div class="forecasted-weather-container">
                        <!-- switch to dynamic create later -->
@@ -36,11 +33,11 @@
                        <div class="card">test</div>
                        <div class="card">test</div>
                    </div>  
-            </section>
+            </div>
         </div>
           
     </main>
-
+    <!-- link to javascript file -->
     <script src="./assets/js/script.js"></script>
 </body>
 </html>

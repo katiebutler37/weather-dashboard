@@ -9,13 +9,34 @@ header {
     padding: 6px;
     text-align: center;
     color: white;
+    width: 100%;
 }
 
-.row {
+.container-wrapper {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    flex-direction: row;
+}
+
+.search-container {
+    flex: 1;
+}
+
+.form-input {
+    display: block;
+    width: 95%;
+    margin: 5px 5px 5px 0;
+}
+
+.display-container {
+    flex: 2;
+}
+.current-weather-container {
+    border: 1px solid rgb(64, 64, 64);
+    margin: 8px;
+    padding: 6px;
+    display: flex;
+    
 }
 
 .card {
@@ -25,12 +46,18 @@ header {
     padding: 6px;
 }
 
-.search-container {
-    flex: auto;
-}
-
 .forecasted-weather-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-wrap: wrap;
+    margin: 8px;
 }
+
+/* @media (min-width: 576px) {
+}
+
+@media (min-width: 768px) {
+}
+
+@media (min-width: 992px) {
+} */

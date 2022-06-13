@@ -114,8 +114,9 @@ var getCityCoordinates = function(city) {
 
   var buttonClickHandler = function(event) {
       var searchedCity = event.target.textContent;
-        getCityCoordinates(searchedCity);
-  }
+      cityInputEl.value = searchedCity;
+      getCityCoordinates(searchedCity);
+  };
 
   var displayCurrentWeather = function(currentTemp, currentWind, currentHumidity, currentUVI, currentWeatherIcon, currentWeatherIconText) {
     currentWeatherContainerEl.classList = "current-weather-container";
@@ -125,7 +126,6 @@ var getCityCoordinates = function(city) {
     // get value from input element
     var city = cityInputEl.value.trim();
 
-    if (city) {
     var cityTitleArray = city.split(" ");
     for (var i=0; i < cityTitleArray.length; i++) {
         cityTitleArray[i] = cityTitleArray[i].charAt(0).toUpperCase() + cityTitleArray[i].slice(1).toLowerCase()
@@ -133,11 +133,7 @@ var getCityCoordinates = function(city) {
     var cityTitle = cityTitleArray.join(" ");
     cityTitleEl.innerHTML = "<h2>" + cityTitle + " (" + currentDay + ")" + "<img src='https://openweathermap.org/img/w/" + currentWeatherIcon + ".png' class='current-weather-img' alt='" + currentWeatherIconText + "' /></h2>";
     currentWeatherContainerEl.appendChild(cityTitleEl);
-    } else {
-        var title = ;
-        // cityTitleEl.innerHTML = "<h2>" + searchedCity + " (" + currentDay + ")" + "<img src='https://openweathermap.org/img/w/" + currentWeatherIcon + ".png' class='current-weather-img' alt='" + currentWeatherIconText + "' /></h2>";
-        // currentWeatherContainerEl.appendChild(cityTitleEl);
-    };
+    
     
     //load searchedCities (an array) from localStorage and turn strings back to objects
     var searchedCities = JSON.parse(localStorage.getItem("searched-cities")) || [];

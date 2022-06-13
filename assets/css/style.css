@@ -1,5 +1,5 @@
 :root {
-    --primary-color: rgb(44, 52, 66);
+    --primary-color: rgb(50, 66, 91);
 }
 body {
     font-family: 'Open Sans', sans-serif;
@@ -55,10 +55,17 @@ header h1 {
     background-color: rgb(209, 209, 209);
 }
 
+.btn:hover {
+    background-color: gray;
+}
+
 .search-btn {
     background-color: rgb(107, 164, 244);
     color: white;
-    
+}
+
+.search-btn:hover{
+    background-color: var(--primary-color);
 }
 
 .display-container {

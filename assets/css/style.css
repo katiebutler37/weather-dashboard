@@ -52,11 +52,6 @@ header h1 {
     text-align: left;
 }
 
-.current-weather {
-    text-align: left;
-    display: block;
-}
-
 .current-weather-img {
     width: 40px;
 }
@@ -82,6 +77,20 @@ header h1 {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+}
+
+.favorable {
+    background-color: rgb(3, 144, 3);
+    color: white;
+}
+
+.moderate {
+    background-color: rgb(228, 191, 4);
+}
+
+.severe {
+    background-color: rgba(255, 0, 0, 0.693);
+    color: white;
 }
 
 /* @media (min-width: 576px) {

@@ -75,7 +75,9 @@ var getCityCoordinates = function(city) {
                 var forecastedTemp = data.daily[i].temp.day;
                 var forecastedWind = data.daily[i].wind_speed;
                 var forecastedHumidity = data.daily[i].humidity;
-                var forecastedDate = data.daily[i].dt;
+                var forecastedUnixDate = data.daily[i].dt;
+                //convert Unix to a date through moment.js
+                var forecastedDate = moment(forecastedUnixDate * 1000).format("L");
                 var forcastedIcon = data.daily[i].weather[0].icon;
                 var forcastedIconText = data.daily[i].weather[0].description;
                 displayWeatherForecast(forecastedTemp, forecastedWind, forecastedHumidity, forecastedDate, forcastedIcon, forcastedIconText);
@@ -149,9 +151,24 @@ var getCityCoordinates = function(city) {
 
      // create an HTML tag for UVI
      var currentUVIEl = document.createElement("p");
-     currentUVIEl.classList = "current-weather";
+    currentUVIEl.classList = "current-weather";
      //write text content
-     currentUVIEl.innerHTML = "UV Index: <span class='uvi'>" + currentUVI + "</span>";
+     currentUVIEl.innerHTML = "UV Index: ";
+
+    // create a span element to hold UVI value
+    var currentUVIValueEl = document.createElement('span');
+    currentUVIValueEl.textContent = currentUVI;
+
+    // append to container
+    currentUVIEl.appendChild(currentUVIValueEl);
+     //colour-code UVI
+     if (currentUVI < 3) {
+        currentUVIValueEl.classList = "favorable";
+     } else if (3 <= currentUVI < 8) {
+         currentUVIValueEl.classList = "moderate";
+     } else if (currentUVI >= 8) {
+         currentUVIValueEl.className.add("severe");
+     }
      //append to the current weather container
      currentWeatherContainerEl.appendChild(currentUVIEl);
 }; 

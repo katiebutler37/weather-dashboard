@@ -157,7 +157,7 @@ var getCityCoordinates = function(city) {
 
     // create a span element to hold UVI value
     var currentUVIValueEl = document.createElement('span');
-    currentUVIValueEl.textContent = currentUVI;
+    currentUVIValueEl.innerHTML = currentUVI;
 
     // append to container
     currentUVIEl.appendChild(currentUVIValueEl);
@@ -167,7 +167,7 @@ var getCityCoordinates = function(city) {
      } else if (3 <= currentUVI < 8) {
          currentUVIValueEl.classList = "moderate";
      } else if (currentUVI >= 8) {
-         currentUVIValueEl.className.add("severe");
+         currentUVIValueEl.classList = "severe";
      }
      //append to the current weather container
      currentWeatherContainerEl.appendChild(currentUVIEl);

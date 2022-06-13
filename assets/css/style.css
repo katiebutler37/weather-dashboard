@@ -82,15 +82,22 @@ header h1 {
 .favorable {
     background-color: rgb(3, 144, 3);
     color: white;
+    padding: 3px 6px;
+    border-radius: 5px;
 }
 
 .moderate {
-    background-color: rgb(228, 191, 4);
+    background-color: rgb(201, 154, 0);
+    padding: 3px 6px;
+    color: white;
+    border-radius: 5px;
 }
 
 .severe {
     background-color: rgba(255, 0, 0, 0.693);
     color: white;
+    padding: 3px 6px;
+    border-radius: 5px;
 }
 
 /* @media (min-width: 576px) {

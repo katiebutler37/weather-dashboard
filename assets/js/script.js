@@ -12,7 +12,7 @@ var currentWeatherContainerEl = document.querySelector(".current-weather-contain
 var forecastedWeatherContainerEl = document.querySelector(".forecasted-weather-container");
 var fiveDayForecastContainerEl = document.querySelector(".five-day-forecast");
 var searchHistoryContainerEl = document.querySelector(".search-history-container");
-var searchedCityButtonEl = document.querySelector(".searched-city-btn");
+var searchedCityButtonEl = document.querySelector(".search-history-container");
 
 //Variable storing today's date
 var currentDay = moment().format("L");
@@ -73,7 +73,7 @@ var getCityCoordinates = function(city) {
 
              displayCurrentWeather(currentTemp, currentWind, currentHumidity, currentUVI, currentWeatherIcon, currentWeatherIconText);
              displayFiveDayForecastHeading();
-            //  displaySearchHistory();
+             displaySearchHistory();
              //get forecasted weather data and assign variables
              for (var i = 1; i < 6; i++) {
                 var forecastedTemp = data.daily[i].temp.day;
@@ -112,6 +112,11 @@ var getCityCoordinates = function(city) {
     }
   };
 
+  var buttonClickHandler = function(event) {
+      var searchedCity = event.target.textContent;
+        getCityCoordinates(searchedCity);
+  }
+
   var displayCurrentWeather = function(currentTemp, currentWind, currentHumidity, currentUVI, currentWeatherIcon, currentWeatherIconText) {
     currentWeatherContainerEl.classList = "current-weather-container";
      //clear old display content
@@ -119,6 +124,8 @@ var getCityCoordinates = function(city) {
 
     // get value from input element
     var city = cityInputEl.value.trim();
+
+    if (city) {
     var cityTitleArray = city.split(" ");
     for (var i=0; i < cityTitleArray.length; i++) {
         cityTitleArray[i] = cityTitleArray[i].charAt(0).toUpperCase() + cityTitleArray[i].slice(1).toLowerCase()
@@ -126,6 +133,11 @@ var getCityCoordinates = function(city) {
     var cityTitle = cityTitleArray.join(" ");
     cityTitleEl.innerHTML = "<h2>" + cityTitle + " (" + currentDay + ")" + "<img src='https://openweathermap.org/img/w/" + currentWeatherIcon + ".png' class='current-weather-img' alt='" + currentWeatherIconText + "' /></h2>";
     currentWeatherContainerEl.appendChild(cityTitleEl);
+    } else {
+        var title = ;
+        // cityTitleEl.innerHTML = "<h2>" + searchedCity + " (" + currentDay + ")" + "<img src='https://openweathermap.org/img/w/" + currentWeatherIcon + ".png' class='current-weather-img' alt='" + currentWeatherIconText + "' /></h2>";
+        // currentWeatherContainerEl.appendChild(cityTitleEl);
+    };
     
     //load searchedCities (an array) from localStorage and turn strings back to objects
     var searchedCities = JSON.parse(localStorage.getItem("searched-cities")) || [];
@@ -246,7 +258,7 @@ var displayWeatherForecast = function(forecastedTemp, forecastedWind, forecasted
 
 var displaySearchHistory = function() {
 
-    if (localStorage.length > 0) {
+     if (localStorage.length > 0) {
         //grab stored array of searched cities from localStorage
         var searchedCities = JSON.parse(localStorage.getItem("searched-cities"));
         console.log(searchedCities);
@@ -271,7 +283,7 @@ var displaySearchHistory = function() {
 
 displaySearchHistory();
 
-searchedCityButtonEl.addEventListener("click", getCityCoordinates(target.textContent))
+searchedCityButtonEl.addEventListener("click", buttonClickHandler)
 
   // add event listeners to forms
 cityFormEl.addEventListener('submit', formSubmitHandler);

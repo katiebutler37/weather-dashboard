@@ -39,7 +39,26 @@ header h1 {
 .form-input {
     display: block;
     width: 95%;
-    margin: 5px 5px 5px 0;
+    margin: 5px 0;
+    padding: 6px;
+    border-radius: 5px;
+    border: 1px solid var(--primary-color);
+}
+
+.btn {
+    padding: 6px;
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(209, 209, 209);
+}
+
+.search-btn {
+    background-color: rgb(107, 164, 244);
+    color: white;
+    
 }
 
 .display-container {
@@ -77,6 +96,7 @@ header h1 {
     padding: 6px;
     flex: 1;
     margin: 8px;
+    min-width: 100px;
 }
 
 .forecasted-weather {
@@ -128,6 +148,12 @@ header h1 {
 
 .hide {
     display: none;
+}
+
+.search-history-container {
+    margin: 15px 0;
+    border-top: 1px solid var(--primary-color);
+    padding-top: 7px;
 }
 
 /* @media (min-width: 576px) {

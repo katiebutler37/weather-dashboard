@@ -1,5 +1,5 @@
 :root {
-    --primary-color: rgb(29, 34, 50);
+    --primary-color: rgb(44, 52, 66);
 }
 body {
     font-family: 'Open Sans', sans-serif;
@@ -56,21 +56,47 @@ header h1 {
     width: 40px;
 }
 
-.city-title {
+.five-day-forecast h3{
+    display: block;
+    margin: 20px 8px 8px 8px;
+}
+
+.city-title h2 {
     font-weight: bold;
     font-size: 18px;
     color: var(--primary-color);
     display: flex;
     align-items: center;
+    margin: 0;
 }
 
 .card {
-    background-color: rgb(29, 34, 50);
+    background-color: var(--primary-color);
     border-radius: 0;
     color: white;
     padding: 6px;
     flex: 1;
     margin: 8px;
+}
+
+.forecasted-weather {
+    font-size: 12px;
+}
+
+.card h4 {
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.forecasted-weather-img {
+    width: 30px;
+    margin: 0;
+    padding-top: 0;
+}
+
+.forecasted-weather-img-container {
+    margin: 0;
+    padding: 0;
 }
 
 .forecasted-weather-container {
@@ -87,7 +113,7 @@ header h1 {
 }
 
 .moderate {
-    background-color: rgb(201, 154, 0);
+    background-color: rgb(227, 175, 5);
     padding: 3px 6px;
     color: white;
     border-radius: 5px;
@@ -98,6 +124,10 @@ header h1 {
     color: white;
     padding: 3px 6px;
     border-radius: 5px;
+}
+
+.hide {
+    display: none;
 }
 
 /* @media (min-width: 576px) {

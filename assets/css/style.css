@@ -57,11 +57,16 @@ header h1 {
     display: block;
 }
 
+.current-weather-img {
+    width: 40px;
+}
+
 .city-title {
     font-weight: bold;
     font-size: 18px;
     color: var(--primary-color);
-    display: block;
+    display: flex;
+    align-items: center;
 }
 
 .card {

@@ -67,8 +67,15 @@ var getCityCoordinates = function(city) {
              var currentHumidity = data.current.humidity;
              var currentUVI = data.current.uvi;
              var currentWeatherIcon = data.current.weather[0].icon;
-             displayCurrentWeather(currentTemp, currentWind, currentHumidity, currentUVI, currentWeatherIcon);
+             var currentWeatherIconText = data.current.weather[0].description;
+
+             displayCurrentWeather(currentTemp, currentWind, currentHumidity, currentUVI, currentWeatherIcon, currentWeatherIconText);
              //get forecasted weather data and assign variables
+             for (var i = 1; i < 6; i++) {
+                var forecastedTemp = data.daily[i].temp.day;
+                var forecastedWind = data.daily[i].wind_speed;
+                var forecastedHumidity = data.daily[i].humidity;
+             }
            });
          } else {
            alert('Error: City Not Found');
@@ -95,7 +102,7 @@ var getCityCoordinates = function(city) {
     }
   };
 
-  var displayCurrentWeather = function(currentTemp, currentWind, currentHumidity, currentUVI, currentWeatherIcon) {
+  var displayCurrentWeather = function(currentTemp, currentWind, currentHumidity, currentUVI, currentWeatherIcon, currentWeatherIconText) {
      //clear old display content
      currentWeatherContainerEl.innerHTML = "";
 
@@ -106,7 +113,7 @@ var getCityCoordinates = function(city) {
         cityTitleArray[i] = cityTitleArray[i].charAt(0).toUpperCase() + cityTitleArray[i].slice(1).toLowerCase()
     };
     var cityTitle = cityTitleArray.join(" ");
-    cityTitleEl.innerHTML = cityTitle + " (" + currentDay + ")" + "<i class='" + currentWeatherIcon + "'></i>";
+    cityTitleEl.innerHTML = cityTitle + " (" + currentDay + ")" + "<img src='https://openweathermap.org/img/w/" + currentWeatherIcon + ".png' class='current-weather-img' alt='" + currentWeatherIconText + "' />";
     currentWeatherContainerEl.appendChild(cityTitleEl);
 
     //clear old input from form

@@ -38,7 +38,7 @@ header h1 {
 
 .form-input {
     display: block;
-    width: 95%;
+    width: 98%;
     margin: 5px 0;
     padding: 6px;
     border-radius: 5px;
@@ -163,11 +163,32 @@ header h1 {
     padding-top: 7px;
 }
 
-/* @media (min-width: 576px) {
-}
-
-@media (min-width: 768px) {
-}
-
-@media (min-width: 992px) {
-} */
+/* MEDIA QUERY FOR SMALLER DESKTOP SCREENS AND SMALLER */
+@media screen and (max-width: 1000px) {
+    .form-input {
+        width: 95%;
+    }
+    .card {
+        max-width: 120px;
+        min-width: 120px;
+    }
+    .forecasted-weather-container {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+  }
+  
+  /* MEDIA QUERY FOR TABLETS AND SMALLER */
+  @media screen and (max-width: 768px) {
+    .display-container {
+        flex: 1;
+    }
+    .container-wrapper {
+        flex-direction: column;
+    }
+    .form-input {
+        width: 97%;
+    }
+  }
+   

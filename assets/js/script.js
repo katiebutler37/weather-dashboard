@@ -1,4 +1,3 @@
-// var searchHistory = [];
 var geoapify = "https://api.geoapify.com";
 var geoapifyApiKey = "5f6f470ded3b4d53b71e4c9a2385246a";
 var onecall = "https://api.openweathermap.org";
@@ -70,7 +69,7 @@ var getCityCoordinates = function(city) {
              var currentUVI = data.current.uvi;
              var currentWeatherIcon = data.current.weather[0].icon;
              var currentWeatherIconText = data.current.weather[0].description;
-
+             //call functions to display data on page
              displayCurrentWeather(currentTemp, currentWind, currentHumidity, currentUVI, currentWeatherIcon, currentWeatherIconText);
              displayFiveDayForecastHeading();
              displaySearchHistory();
@@ -113,6 +112,7 @@ var getCityCoordinates = function(city) {
   };
 
   var buttonClickHandler = function(event) {
+      //grab text from button clicked and give it back to original fetch function
       var searchedCity = event.target.textContent;
       cityInputEl.value = searchedCity;
       getCityCoordinates(searchedCity);
@@ -133,7 +133,6 @@ var getCityCoordinates = function(city) {
     var cityTitle = cityTitleArray.join(" ");
     cityTitleEl.innerHTML = "<h2>" + cityTitle + " (" + currentDay + ")" + "<img src='https://openweathermap.org/img/w/" + currentWeatherIcon + ".png' class='current-weather-img' alt='" + currentWeatherIconText + "' /></h2>";
     currentWeatherContainerEl.appendChild(cityTitleEl);
-    
     
     //load searchedCities (an array) from localStorage and turn strings back to objects
     var searchedCities = JSON.parse(localStorage.getItem("searched-cities")) || [];
@@ -208,7 +207,6 @@ var displayFiveDayForecastHeading = function() {
 }
 
 var displayWeatherForecast = function(forecastedTemp, forecastedWind, forecastedHumidity, forecastedDate, forecastedIcon, forecastedIconText) {
-
     //dynamically create card element to hold daily forecast content
     var forecastCardEl = document.createElement("div");
     forecastCardEl.classList = "card";
@@ -253,11 +251,9 @@ var displayWeatherForecast = function(forecastedTemp, forecastedWind, forecasted
 }
 
 var displaySearchHistory = function() {
-
      if (localStorage.length > 0) {
         //grab stored array of searched cities from localStorage
         var searchedCities = JSON.parse(localStorage.getItem("searched-cities"));
-        console.log(searchedCities);
         //to sort from most-least recent searched
         var recentSearchedCities = searchedCities.reverse();
         //to remove any duplicates for final display version
@@ -277,8 +273,10 @@ var displaySearchHistory = function() {
     };
 };
 
+//displays on load of page
 displaySearchHistory();
 
+//add event listener to search history items
 searchedCityButtonEl.addEventListener("click", buttonClickHandler)
 
   // add event listeners to forms

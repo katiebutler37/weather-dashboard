@@ -75,6 +75,10 @@ var getCityCoordinates = function(city) {
                 var forecastedTemp = data.daily[i].temp.day;
                 var forecastedWind = data.daily[i].wind_speed;
                 var forecastedHumidity = data.daily[i].humidity;
+                var forecastedDate = data.daily[i].dt;
+                var forcastedIcon = data.daily[i].weather[0].icon;
+                var forcastedIconText = data.daily[i].weather[0].description;
+                displayWeatherForecast(forecastedTemp, forecastedWind, forecastedHumidity, forecastedDate, forcastedIcon, forcastedIconText);
              }
            });
          } else {
@@ -152,8 +156,13 @@ var getCityCoordinates = function(city) {
      currentWeatherContainerEl.appendChild(currentUVIEl);
 }; 
 
-var displayWeatherForecast = function() {
-
+var displayWeatherForecast = function(forecastedTemp, forecastedWind, forecastedHumidity, forecastedDate, forcastedIcon, forcastedIconText) {
+    console.log(forecastedTemp);
+    console.log(forecastedWind);
+    console.log(forecastedHumidity);
+    console.log(forecastedDate);
+    console.log(forcastedIcon);
+    console.log(forcastedIconText);
 }
 
   // add event listeners to forms
